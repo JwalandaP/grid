@@ -1,0 +1,92 @@
+/* the main container which contains all the other contents inside it.
+it is using the grid-template-areas grid layout.
+*/
+.grid-container {
+  margin: 0;
+  height: 100vh;
+  display: grid;
+  border: 1px solid black;
+  grid-template-areas:
+    "header header header"
+    "sidebar main aside"
+    "footer footer footer";
+  grid-template-rows: 1fr 8fr 1fr;
+  grid-template-columns: 3fr 6fr 1fr;
+  /* background-color: black; */
+  gap: 2px;
+  text-align: center;
+}
+/* these are the properties given to all the main divs visible on the page */
+.grid-container > * {
+  border: 1px solid black;
+  border-radius: 20px;
+}
+/* css properties given to teh header */
+.header {
+  grid-area: header;
+}
+
+/* css properties given to the sidebar */
+.sidebar {
+  grid-area: sidebar;
+  /* when the page is opened in a mobile, the sidebar dissappears */
+  @media screen and (width<=640px) {
+    display: none;
+  }
+}
+
+/* the main div which contains teh 6 small divs  */
+.main {
+  grid-area: main;
+  display: grid;
+  grid-template-rows: auto 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
+  /* when the page is openend in a mobile there will be 7 rows and 1 column. */
+  @media screen and (width<=640px) {
+    width: 100vw;
+    grid-template-rows: auto 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  /* when the page is openend in a tablet there will be 4 rows and 2 column. */
+  @media screen and (641px<= width <=1024px) {
+    grid-template-rows: auto 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* aside */
+.aside {
+  grid-area: aside;
+  /* when the page is opened in a mobile, the aside dissappears */
+  @media screen and (width<=640px) {
+    display: none;
+  }
+}
+
+/* footer */
+.footer {
+  grid-area: footer;
+}
+
+/* these are the css properties given to the child items of the main parent div */
+.main > * {
+  background-color: #3c5b6f;
+  border: 1px solid white;
+  border-radius: 20px;
+  margin: 2%;
+}
+
+/* Since a different div is given to the word "main content", its css also changes according to the screen size. */
+.topic {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  @media screen and (width<=640px) {
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+  @media screen and (641px<= width <=1024px) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}
